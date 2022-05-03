@@ -14,7 +14,7 @@ public class Main {
     }
 
     /**
-     * Sends an email draft using a TLS connection with GMail
+     * Sends an email draft using a TLS connection with Gmail
      * @param draft an EmailDraft that will be sent
      */
     public static void sendEmail(EmailDraft draft){

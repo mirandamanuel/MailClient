@@ -1,8 +1,8 @@
 public class EmailDraft {
-    String sender;
-    String recipients;
-    String subject;
-    String message;
+    private String sender;
+    private String recipients;
+    private String subject;
+    private String message;
 
     /**
      * Creates the draft of an email
