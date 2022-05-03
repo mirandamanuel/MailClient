@@ -1,7 +1,6 @@
 import javax.mail.*;
 import javax.mail.internet.*;
 import java.util.Properties;
-import javax.activation.*;
 
 public class Main {
     static User user;
@@ -10,7 +9,7 @@ public class Main {
         user = new User("javamailsender3800@gmail.com", "Chapter6!Skirt!Palace");
         //sample email to send, feel free to change the details and send test emails to your accounts
         EmailDraft draft = new EmailDraft(user.getUsername(), "mmiranda2cpp@gmail.com",
-                "This is a test", "Email successfully sent. Hello me!");
+                "This is a test2", "Email successfully sent. Hello me!");
         sendEmail(draft);
     }
 
