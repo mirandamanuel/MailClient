@@ -21,12 +21,19 @@ public class MailClient extends Application {
     private TextField subjectTextField;
     private TextArea emailMessage;
     private Label emailSent;
+    Stage setPrimaryStage;
+    Scene emailSendScene;
+    Scene loginScene;
+    private TextField emailTextField;
+    private TextField passwordTextField;
+    private Label errorLabel;
     public static void main(String[] args) {
         launch(args);
     }
 
     @Override
     public void start(Stage primaryStage) {
+        //Mail client email send
         //Create Labels, TextFields, TextArea, and Button
         fromLabel = new Label("From: ");
         toLabel = new Label("To: ");
@@ -56,20 +63,57 @@ public class MailClient extends Application {
         //Create VBox
         VBox vbox = new VBox(10, hbox, emailMessage, sendButton, emailSent);
 
-        //Set alignment
+        //Set alignment of VBox
         vbox.setAlignment(Pos.CENTER);
 
-        //Set padding
+        //Set padding of VBox
         vbox.setPadding(new Insets(10));
 
-        //Create Scene
-        Scene scene = new Scene(vbox);
+        emailSendScene = new Scene(vbox);
+
+        //Mail client login
+        //Create Labels, TextFields, and Button
+        Label loginLabel = new Label("Login");
+        Label emailLabel = new Label("email: ");
+        Label passwordLabel = new Label("password: ");
+        emailTextField = new TextField();
+        passwordTextField = new TextField();
+        errorLabel = new Label();
+        Button loginButton = new Button("Login");
+
+        //Event handler of loginButton
+        loginButton.setOnAction(new LoginButtonHandler());
+
+        //Set width of TextFields
+        emailTextField.setPrefWidth(300.0);
+        passwordTextField.setPrefWidth(300.0);
+
+        //Create VBox2 of Labels and TextFields
+        VBox vboxLabel2 = new VBox(30, emailLabel, passwordLabel);
+        VBox vboxTextField2 = new VBox(20, emailTextField, passwordTextField);
+
+        //Create HBox2
+        HBox hbox2 = new HBox(10, vboxLabel2, vboxTextField2);
+
+        //Create VBox2
+        VBox vbox2 = new VBox(10, loginLabel, hbox2, errorLabel, loginButton);
+
+        //Set alignment of VBox2
+        vbox2.setAlignment(Pos.CENTER);
+
+        //Set padding of VBox2
+        vbox2.setPadding(new Insets(20));
+
+        setPrimaryStage = primaryStage;
+
+        //Create Login Scene
+        loginScene = new Scene(vbox2, 410, 200);
 
         //Set Title
         primaryStage.setTitle("Mail Client");
 
         //Set Scene
-        primaryStage.setScene(scene);
+        primaryStage.setScene(loginScene);
 
         //Display
         primaryStage.show();
@@ -79,6 +123,27 @@ public class MailClient extends Application {
         @Override
         public void handle(ActionEvent event) {
             emailSent.setText("Successfully emailed");
+        }
+    }
+
+    class LoginButtonHandler implements EventHandler<ActionEvent> {
+        @Override
+        public void handle(ActionEvent event) {
+            String email = emailTextField.getText();
+            String password = passwordTextField.getText();
+
+            if (!email.equals("") && !password.equals("")) {
+                setPrimaryStage.setScene(emailSendScene);
+            }
+            else if (email.equals("") && password.equals("")) {
+                errorLabel.setText("Enter email and password to login");
+            }
+            else if (email.equals("")) {
+                errorLabel.setText("Enter email to login");
+            }
+            else if (password.equals("")) {
+                errorLabel.setText("Enter password to login");
+            }
         }
     }
 }
