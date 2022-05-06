@@ -14,10 +14,8 @@ import javafx.event.ActionEvent;
 
 public class MailClient extends Application {
     static User user;
-    private Label fromLabel;
     private Label toLabel;
     private Label subject;
-    private TextField fromEmail;
     private TextField toEmail;
     private TextField subjectTextField;
     private TextArea emailMessage;
@@ -31,22 +29,14 @@ public class MailClient extends Application {
 
     public static void main(String[] args) {
         launch(args);
-        //creation of user of the mail client, params will be replaced by user submission later
-        user = new User("javamailsender3800@gmail.com", "Chapter6!Skirt!Palace");
-        //sample email to send, feel free to change the details and send test emails to your accounts
-        EmailDraft draft = new EmailDraft(user.getUsername(), "mmiranda2cpp@gmail.com",
-                "This is a test2", "Email successfully sent. Hello me!");
-        //send(user, draft);
     }
 
     @Override
     public void start(Stage primaryStage) {
         //Mail client email send
         //Create Labels, TextFields, TextArea, and Button
-        fromLabel = new Label("From: ");
         toLabel = new Label("To: ");
         subject = new Label("Subject: ");
-        fromEmail = new TextField();
         toEmail = new TextField();
         subjectTextField = new TextField();
         emailMessage = new TextArea();
@@ -57,13 +47,12 @@ public class MailClient extends Application {
         sendButton.setOnAction(new SendButtonHandler());
 
         //Set width of TextFields
-        fromEmail.setPrefWidth(430.0);
         toEmail.setPrefWidth(430.0);
         subjectTextField.setPrefWidth(430.0);
 
         //Create VBox of Labels and TextFields
-        VBox vboxLabel = new VBox(20, fromLabel, toLabel, subject);
-        VBox vboxTextField = new VBox(10, fromEmail, toEmail, subjectTextField);
+        VBox vboxLabel = new VBox(20, toLabel, subject);
+        VBox vboxTextField = new VBox(10, toEmail, subjectTextField);
 
         //Create HBox
         HBox hbox = new HBox(10, vboxLabel, vboxTextField);
@@ -130,11 +119,10 @@ public class MailClient extends Application {
     class SendButtonHandler implements EventHandler<ActionEvent> {
         @Override
         public void handle(ActionEvent event) {
-            String sender = fromEmail.getText();
             String recipient = toEmail.getText();
             String subject = subjectTextField.getText();
             String message = emailMessage.getText();
-            EmailDraft emailDraft = new EmailDraft(sender, recipient, subject, message);
+            EmailDraft emailDraft = new EmailDraft(user.getUsername(), recipient, subject, message);
             SendEmail sendEmail = new SendEmail();
 
             sendEmail.send(user, emailDraft);
