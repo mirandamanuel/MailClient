@@ -13,6 +13,7 @@ import javafx.event.EventHandler;
 import javafx.event.ActionEvent;
 
 public class MailClient extends Application {
+    static User user;
     private Label fromLabel;
     private Label toLabel;
     private Label subject;
@@ -27,8 +28,15 @@ public class MailClient extends Application {
     private TextField emailTextField;
     private TextField passwordTextField;
     private Label errorLabel;
+
     public static void main(String[] args) {
         launch(args);
+        //creation of user of the mail client, params will be replaced by user submission later
+        user = new User("javamailsender3800@gmail.com", "Chapter6!Skirt!Palace");
+        //sample email to send, feel free to change the details and send test emails to your accounts
+        EmailDraft draft = new EmailDraft(user.getUsername(), "mmiranda2cpp@gmail.com",
+                "This is a test2", "Email successfully sent. Hello me!");
+        //send(user, draft);
     }
 
     @Override
