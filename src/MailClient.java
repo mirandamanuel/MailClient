@@ -130,6 +130,15 @@ public class MailClient extends Application {
     class SendButtonHandler implements EventHandler<ActionEvent> {
         @Override
         public void handle(ActionEvent event) {
+            String sender = fromEmail.getText();
+            String recipient = toEmail.getText();
+            String subject = subjectTextField.getText();
+            String message = emailMessage.getText();
+            EmailDraft emailDraft = new EmailDraft(sender, recipient, subject, message);
+            SendEmail sendEmail = new SendEmail();
+
+            sendEmail.send(user, emailDraft);
+            
             emailSent.setText("Successfully emailed");
         }
     }
@@ -139,6 +148,7 @@ public class MailClient extends Application {
         public void handle(ActionEvent event) {
             String email = emailTextField.getText();
             String password = passwordTextField.getText();
+            user = new User(email, password);
 
             if (!email.equals("") && !password.equals("")) {
                 setPrimaryStage.setScene(emailSendScene);
