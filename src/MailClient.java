@@ -11,6 +11,8 @@ import javafx.geometry.Pos;
 import javafx.geometry.Insets;
 import javafx.event.EventHandler;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 
 public class MailClient extends Application {
     static User user;
@@ -23,6 +25,7 @@ public class MailClient extends Application {
     Stage setPrimaryStage;
     Scene emailSendScene;
     Scene loginScene;
+    Scene inboxScene;
     private TextField emailTextField;
     private TextField passwordTextField;
     private Label errorLabel;
@@ -105,6 +108,12 @@ public class MailClient extends Application {
 
         //Create Login Scene
         loginScene = new Scene(vbox2, 410, 200);
+
+        //Mail client inbox
+        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+
+        //Create Inbox Scene
+        inboxScene = new Scene(root);
 
         //Set Title
         primaryStage.setTitle("Mail Client");
