@@ -1,3 +1,5 @@
+import java.io.IOException;
+
 import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
@@ -35,7 +37,7 @@ public class MailClient extends Application {
     }
 
     @Override
-    public void start(Stage primaryStage) {
+    public void start(Stage primaryStage) throws IOException {
         //Mail client email send
         //Create Labels, TextFields, TextArea, and Button
         toLabel = new Label("To: ");
