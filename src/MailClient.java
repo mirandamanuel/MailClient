@@ -1,5 +1,4 @@
 import java.io.IOException;
-
 import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
@@ -13,8 +12,14 @@ import javafx.geometry.Pos;
 import javafx.geometry.Insets;
 import javafx.event.EventHandler;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.input.MouseEvent;
+import java.util.ArrayList;
+import javax.mail.Address;
 
 public class MailClient extends Application {
     static User user;
@@ -31,6 +36,7 @@ public class MailClient extends Application {
     private TextField emailTextField;
     private TextField passwordTextField;
     private Label errorLabel;
+    public Button butInbox;
 
     public static void main(String[] args) {
         launch(args);
@@ -127,6 +133,46 @@ public class MailClient extends Application {
         primaryStage.show();
     }
 
+    @FXML
+    private TableView<EmailMessage> emTable;
+
+    @FXML
+    private TableColumn<EmailMessage, String> emDate;
+
+    @FXML
+    private TableColumn<EmailMessage, String> emSubject;
+
+
+    @FXML
+    private TableColumn<EmailMessage, String> emFrom;
+
+
+    @FXML
+    private TableColumn<EmailMessage, ArrayList<Address>> emTo;
+
+
+    @FXML
+    private TableColumn<EmailMessage, String> emMessage;
+
+
+    public void inbox(ActionEvent e){
+
+}
+
+public void compose(ActionEvent e){
+
+}
+
+    public void handle(MouseEvent mouseEvent) {
+    }
+
+    public void inboxButtClicked(MouseEvent mouseEvent) {
+    }
+
+    public void composeButtClicked(MouseEvent mouseEvent) {
+        setPrimaryStage.setScene(emailSendScene);
+    }
+
     class SendButtonHandler implements EventHandler<ActionEvent> {
         @Override
         public void handle(ActionEvent event) {
@@ -150,7 +196,7 @@ public class MailClient extends Application {
             user = new User(email, password);
 
             if (!email.equals("") && !password.equals("")) {
-                setPrimaryStage.setScene(emailSendScene);
+                setPrimaryStage.setScene(inboxScene);
             }
             else if (email.equals("") && password.equals("")) {
                 errorLabel.setText("Enter email and password to login");
