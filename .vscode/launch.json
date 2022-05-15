@@ -9,14 +9,14 @@
             "type": "java",
             "name": "Launch Current File",
             "request": "launch",
-            "mainClass": "${file}"
+            "mainClass": "${file}",
         },
         {
             "type": "java",
             "name": "Launch MailClient",
             "request": "launch",
             "mainClass": "MailClient",
-            "projectName": "MailClient_563d58e2"
+            "projectName": "MailClient_563d58e2",
         },
         {
             "type": "java",
@@ -25,5 +25,5 @@
             "mainClass": "Main",
             "projectName": "MailClient_563d58e2"
         }
-    ]
+    ],
 }
