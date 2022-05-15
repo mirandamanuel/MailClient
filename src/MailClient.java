@@ -135,11 +135,11 @@ public class MailClient extends Application {
 
     public void inbox(ActionEvent e){
 
-}
+    }
 
-public void compose(ActionEvent e){
+    public void compose(ActionEvent e){
 
-}
+    }
 
     public void handle(MouseEvent mouseEvent) {
     }
@@ -159,9 +159,8 @@ public void compose(ActionEvent e){
             String subject = subjectTextField.getText();
             String message = emailMessage.getText();
             EmailDraft emailDraft = new EmailDraft(user.getUsername(), recipient, subject, message);
-            SendEmail sendEmail = new SendEmail();
 
-            sendEmail.send(user, emailDraft);
+            SendEmail.send(user, emailDraft);
             
             emailSent.setText("Successfully emailed");
         }
