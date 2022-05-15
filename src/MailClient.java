@@ -180,9 +180,8 @@ public void compose(ActionEvent e){
             String subject = subjectTextField.getText();
             String message = emailMessage.getText();
             EmailDraft emailDraft = new EmailDraft(user.getUsername(), recipient, subject, message);
-            SendEmail sendEmail = new SendEmail();
 
-            sendEmail.send(user, emailDraft);
+            SendEmail.send(user, emailDraft);
             
             emailSent.setText("Successfully emailed");
         }
