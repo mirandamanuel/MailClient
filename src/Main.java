@@ -12,6 +12,7 @@ import javafx.stage.Stage;
 
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
+import javax.mail.Address;
 
 //https://youtu.be/jm_gVp12h0s?t=1223
 //need to create observable list to add data row to table
@@ -43,7 +44,7 @@ public class Main extends Application {
 
 
     @FXML
-    private TableColumn<EmailMessage, ArrayList<Integer>> emTo;
+    private TableColumn<EmailMessage, ArrayList<Addresses>> emTo;
 
 
     @FXML
