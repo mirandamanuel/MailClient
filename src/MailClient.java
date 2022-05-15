@@ -111,47 +111,6 @@ public class MailClient extends Application {
         primaryStage.show();
     }
 
-    @FXML
-    private TableView<EmailMessage> emTable;
-
-    @FXML
-    private TableColumn<EmailMessage, String> emDate;
-
-    @FXML
-    private TableColumn<EmailMessage, String> emSubject;
-
-
-    @FXML
-    private TableColumn<EmailMessage, String> emFrom;
-
-
-    @FXML
-    private TableColumn<EmailMessage, ArrayList<Address>> emTo;
-
-
-    @FXML
-    private TableColumn<EmailMessage, String> emMessage;
-
-
-    public void inbox(ActionEvent e){
-
-    }
-
-    public void compose(ActionEvent e){
-
-    }
-
-    public void handle(MouseEvent mouseEvent) {
-    }
-
-    public void inboxButtClicked(MouseEvent mouseEvent) {
-    }
-
-    public void composeButtClicked(MouseEvent mouseEvent) {
-        primaryStage.setScene(emailSendScene);
-        primaryStage.show();
-    }
-
     class SendButtonHandler implements EventHandler<ActionEvent> {
         @Override
         public void handle(ActionEvent event) {
