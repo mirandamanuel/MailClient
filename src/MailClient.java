@@ -157,11 +157,11 @@ public class MailClient extends Application {
 
     public void inbox(ActionEvent e){
 
-}
+    }
 
-public void compose(ActionEvent e){
+    public void compose(ActionEvent e){
 
-}
+    }
 
     public void handle(MouseEvent mouseEvent) {
     }
