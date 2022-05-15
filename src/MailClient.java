@@ -29,7 +29,7 @@ public class MailClient extends Application {
     private TextField subjectTextField;
     private TextArea emailMessage;
     private Label emailSent;
-    Stage setPrimaryStage;
+    Stage primaryStage;
     Scene emailSendScene;
     Scene loginScene;
     Scene inboxScene;
@@ -112,7 +112,7 @@ public class MailClient extends Application {
         //Set padding of VBox2
         vbox2.setPadding(new Insets(20));
 
-        setPrimaryStage = primaryStage;
+        this.primaryStage = primaryStage;
 
         //Create Login Scene
         loginScene = new Scene(vbox2, 410, 200);
@@ -170,7 +170,7 @@ public void compose(ActionEvent e){
     }
 
     public void composeButtClicked(MouseEvent mouseEvent) {
-        setPrimaryStage.setScene(emailSendScene);
+        primaryStage.setScene(emailSendScene);
     }
 
     class SendButtonHandler implements EventHandler<ActionEvent> {
@@ -196,7 +196,7 @@ public void compose(ActionEvent e){
             user = new User(email, password);
 
             if (!email.equals("") && !password.equals("")) {
-                setPrimaryStage.setScene(inboxScene);
+                primaryStage.setScene(inboxScene);
             }
             else if (email.equals("") && password.equals("")) {
                 errorLabel.setText("Enter email and password to login");

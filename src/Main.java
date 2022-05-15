@@ -44,7 +44,7 @@ public class Main extends Application {
 
 
     @FXML
-    private TableColumn<EmailMessage, ArrayList<Addresses>> emTo;
+    private TableColumn<EmailMessage, ArrayList<Address>> emTo;
 
 
     @FXML
