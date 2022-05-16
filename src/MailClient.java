@@ -1,7 +1,5 @@
 import java.io.IOException;
 import javafx.application.Application;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -46,7 +44,7 @@ public class MailClient extends Application {
     public void start(Stage primaryStage) throws IOException {
         this.primaryStage = primaryStage;
 
-        /** INBOX */
+        /** ------ INBOX SCENE ----------*/
         Label inboxLabel = new Label("Inbox");
         inboxTable = new TableView<String>();        
  
@@ -56,20 +54,22 @@ public class MailClient extends Application {
         TableColumn msgCol = new TableColumn("Message");
 
         //Adding data to the table
-        ObservableList<String> list = FXCollections.observableArrayList();
-        inboxTable.setItems(list);
+        // ObservableList<String> list = FXCollections.observableArrayList();
+        //inboxTable.setItems(list);
 
         inboxTable.getColumns().addAll(dateCol, subjCol, msgCol);
+
+        Button composeButton = new Button("Compose New Email");
+        composeButton.setOnAction(new ComposeButtonHandler()); //Event handler of loginButton
  
         //Setting the size of the table
         inboxTable.setMaxSize(350, 200);
-        VBox vbox = new VBox();
-        vbox.setSpacing(5);
-        vbox.setPadding(new Insets(10, 50, 50, 60));
-        vbox.getChildren().addAll(inboxLabel, inboxTable);
-        inboxScene = new Scene(vbox, 595, 230);
+        VBox inboxVbox = new VBox(5, inboxLabel, inboxTable, composeButton);
+        inboxVbox.setAlignment(Pos.CENTER);
+        inboxVbox.setPadding(new Insets(10, 50, 50, 60));
+        inboxScene = new Scene(inboxVbox, 595, 230);
 
-        /** EMAIL SEND SCENE */
+        /** ------ EMAIL SEND SCENE ----------*/
         //Create Labels, TextFields, TextArea, and Button
         toLabel = new Label("To: ");
         subject = new Label("Subject: ");
@@ -83,21 +83,23 @@ public class MailClient extends Application {
 
         Button sendButton = new Button("Send");
         sendButton.setOnAction(new SendButtonHandler()); //Event handler of sendButton
+        Button backToInboxButton = new Button("Back to Inbox");
+        backToInboxButton.setOnAction(new InboxButtonHandler());
 
         //Create VBox of Labels and TextFields
         VBox vboxLabel = new VBox(20, toLabel, subject);
         VBox vboxTextField = new VBox(10, toEmail, subjectTextField);
         //Create HBox
-        HBox inboxHbox = new HBox(10, vboxLabel, vboxTextField);
+        HBox hbox = new HBox(10, vboxLabel, vboxTextField);
         //Create VBox
-        VBox inboxVbox = new VBox(10, inboxHbox, emailMessage, sendButton, emailSent);
+        VBox vbox = new VBox(10, hbox, emailMessage, sendButton, backToInboxButton, emailSent);
         //Set alignment of VBox
         vbox.setAlignment(Pos.CENTER);
         //Set padding of VBox
         vbox.setPadding(new Insets(10));
-        emailSendScene = new Scene(inboxVbox);
+        emailSendScene = new Scene(vbox);
 
-        /** LOGIN SCENE */
+        /** ------ LOGIN SCENE ----------*/
         //Create Labels, TextFields, and Button
         Label loginLabel = new Label("Login");
         Label emailLabel = new Label("email: ");
@@ -129,7 +131,7 @@ public class MailClient extends Application {
         //Create Login Scene
         loginScene = new Scene(vbox2, 410, 200);
 
-        //START
+        /** ------ START ----------*/
         primaryStage.setTitle("Mail Client");
         primaryStage.setScene(loginScene);
         primaryStage.show();
@@ -175,6 +177,20 @@ public class MailClient extends Application {
             else if (password.equals("")) {
                 errorLabel.setText("Enter password to login");
             }
+        }
+    }
+
+    class ComposeButtonHandler implements EventHandler<ActionEvent> {
+        @Override
+        public void handle(ActionEvent event) {
+           primaryStage.setScene(emailSendScene);
+        }
+    }
+
+    class InboxButtonHandler implements EventHandler<ActionEvent> {
+        @Override
+        public void handle(ActionEvent event) {
+           primaryStage.setScene(inboxScene);
         }
     }
 }
