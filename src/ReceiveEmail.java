@@ -27,19 +27,18 @@ public static ArrayList<EmailMessage> receiveEmail(User user){
  
         //Iterate the messages
          for (int i = 0; i < emailMessages.length; i++) {
-            em = new EmailMessage();
             Message message = emailMessages[i];
             Address[] toAddress = message.getRecipients(Message.RecipientType.TO);
   
-            em.subject = message.getSubject();  
-            em.from = message.getFrom()[0].toString();
+            String subject = message.getSubject();  
+            String from = message.getFrom()[0].toString();
+            ArrayList<Address> to = new ArrayList<Address>();
             for(int j = 0; j < toAddress.length; j++){
-                em.to.add(toAddress[j]);
+                to.add(toAddress[j]);
             }
-            em.text = message.getContent().toString();
-            em.date = message.getSentDate().toString();
-
-            msgs.add(em);
+            String text = message.getContent().toString();
+            String date = message.getSentDate().toString();
+            msgs.add(new EmailMessage(subject, from, to, text, date));
         }
  
    folder.close(false);
@@ -52,7 +51,7 @@ public static ArrayList<EmailMessage> receiveEmail(User user){
 return msgs;        
 }
  
-public static void recieve(String[] args) {
+public static void main(String[] args) {
  User user = new User("javamailsender3800@gmail.com", "Chapter6!Skirt!Palace");
  ArrayList<EmailMessage> emails = new ArrayList<EmailMessage>();
  
