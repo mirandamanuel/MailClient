@@ -129,30 +129,33 @@ public class MailClient extends Application {
         Label inboxLabel = new Label("Inbox");
         inboxTable = new TableView<>();        
  
+        TableColumn<EmailMessage, String> dateCol = new TableColumn<EmailMessage, String>("Date:");
+        dateCol.setMinWidth(200);
+        dateCol.setCellValueFactory(new PropertyValueFactory<EmailMessage, String>("date"));
         TableColumn<EmailMessage, String> fromCol = new TableColumn<EmailMessage, String>("From");
-        fromCol.setPrefWidth(200);
+        fromCol.setMinWidth(400);
         fromCol.setCellValueFactory(new PropertyValueFactory<EmailMessage, String>("from"));
         TableColumn<EmailMessage, String> subjCol = new TableColumn<EmailMessage, String>("Subject");
-        subjCol.setPrefWidth(200);
+        subjCol.setMinWidth(400);
         subjCol.setCellValueFactory(new PropertyValueFactory<EmailMessage, String>("subject"));
         TableColumn<EmailMessage, String> msgCol = new TableColumn<EmailMessage, String>("Message");
-        msgCol.setPrefWidth(375);
+        msgCol.setMinWidth(475);
         msgCol.setCellValueFactory(new PropertyValueFactory<EmailMessage, String>("text"));
 
         //Add messages to the table
         inboxTable.setItems(getInbox());
 
-        inboxTable.getColumns().addAll(fromCol, subjCol, msgCol);
+        inboxTable.getColumns().addAll(dateCol, fromCol, subjCol, msgCol);
 
         Button composeButton = new Button("Compose New Email");
         composeButton.setOnAction(new ComposeButtonHandler());
  
         //Setting the size of the table
-        inboxTable.setMaxSize(900, 400);
+        ///inboxTable.setMaxSize(900, 400);
         VBox inboxVbox = new VBox(5, inboxLabel, inboxTable, composeButton);
         inboxVbox.setAlignment(Pos.CENTER);
         inboxVbox.setPadding(new Insets(10, 50, 50, 60));
-        inboxScene = new Scene(inboxVbox, 900, 400);
+        inboxScene = new Scene(inboxVbox);
     }
 
 
