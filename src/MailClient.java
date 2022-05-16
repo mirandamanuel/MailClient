@@ -1,5 +1,7 @@
 import java.io.IOException;
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -12,12 +14,18 @@ import javafx.geometry.Pos;
 import javafx.geometry.Insets;
 import javafx.event.EventHandler;
 import javafx.event.ActionEvent;
+<<<<<<< Updated upstream
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.input.MouseEvent;
 import java.util.ArrayList;
 import javax.mail.Address;
+=======
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.input.MouseEvent;
+>>>>>>> Stashed changes
 
 public class MailClient extends Application {
     static User user;
@@ -37,6 +45,8 @@ public class MailClient extends Application {
     public Button butInbox;
     public Button butCompose;
 
+    TableView<String> inboxTable;
+
     public static void main(String[] args) {
         launch(args);
     }
@@ -44,6 +54,29 @@ public class MailClient extends Application {
     @Override
     public void start(Stage primaryStage) throws IOException {
         this.primaryStage = primaryStage;
+
+        /** INBOX */
+        Label inboxLabel = new Label("Inbox");
+        inboxTable = new TableView<String>();        
+ 
+        TableColumn dateCol = new TableColumn("Date");
+        dateCol.setPrefWidth(100);
+        TableColumn subjCol = new TableColumn("Subject");
+        TableColumn msgCol = new TableColumn("Message");
+
+        //Adding data to the table
+        ObservableList<String> list = FXCollections.observableArrayList();
+        inboxTable.setItems(list);
+
+        inboxTable.getColumns().addAll(dateCol, subjCol, msgCol);
+ 
+        //Setting the size of the table
+        inboxTable.setMaxSize(350, 200);
+        VBox vbox = new VBox();
+        vbox.setSpacing(5);
+        vbox.setPadding(new Insets(10, 50, 50, 60));
+        vbox.getChildren().addAll(inboxLabel, inboxTable);
+        inboxScene = new Scene(vbox, 595, 230);
 
         /** EMAIL SEND SCENE */
         //Create Labels, TextFields, TextArea, and Button
@@ -64,14 +97,14 @@ public class MailClient extends Application {
         VBox vboxLabel = new VBox(20, toLabel, subject);
         VBox vboxTextField = new VBox(10, toEmail, subjectTextField);
         //Create HBox
-        HBox hbox = new HBox(10, vboxLabel, vboxTextField);
+        HBox inboxHbox = new HBox(10, vboxLabel, vboxTextField);
         //Create VBox
-        VBox vbox = new VBox(10, hbox, emailMessage, sendButton, emailSent);
+        VBox inboxVbox = new VBox(10, inboxHbox, emailMessage, sendButton, emailSent);
         //Set alignment of VBox
         vbox.setAlignment(Pos.CENTER);
         //Set padding of VBox
         vbox.setPadding(new Insets(10));
-        emailSendScene = new Scene(vbox);
+        emailSendScene = new Scene(inboxVbox);
 
         /** LOGIN SCENE */
         //Create Labels, TextFields, and Button
@@ -111,6 +144,7 @@ public class MailClient extends Application {
         primaryStage.show();
     }
 
+<<<<<<< Updated upstream
     @FXML
     private TableView<EmailMessage> emTable;
 
@@ -147,6 +181,8 @@ public class MailClient extends Application {
     public void inboxButtClicked(MouseEvent mouseEvent) {
     }
 
+=======
+>>>>>>> Stashed changes
     public void composeButtClicked(MouseEvent mouseEvent) {
         primaryStage.setScene(emailSendScene);
         primaryStage.show();
@@ -159,8 +195,9 @@ public class MailClient extends Application {
             String subject = subjectTextField.getText();
             String message = emailMessage.getText();
             EmailDraft emailDraft = new EmailDraft(user.getUsername(), recipient, subject, message);
+            SendEmail sendEmail = new SendEmail();
 
-            SendEmail.send(user, emailDraft);
+            sendEmail.send(user, emailDraft);
             
             emailSent.setText("Successfully emailed");
         }
@@ -174,8 +211,8 @@ public class MailClient extends Application {
             user = new User(email, password);
 
             if (!email.equals("") && !password.equals("")) {
-                //primaryStage.setScene(inboxScene);
-                primaryStage.setScene(emailSendScene);
+                primaryStage.setScene(inboxScene);
+                //primaryStage.setScene(emailSendScene);
             }
             else if (email.equals("") && password.equals("")) {
                 errorLabel.setText("Enter email and password to login");
@@ -189,3 +226,5 @@ public class MailClient extends Application {
         }
     }
 }
+
+
