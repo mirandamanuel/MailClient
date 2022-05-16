@@ -99,6 +99,9 @@ public class MailClient extends Application {
         vbox.setPadding(new Insets(10));
         emailSendScene = new Scene(vbox);
 
+        //Style Email Send Scene
+        emailSendScene.getStylesheets().add("emailsend.css");
+
         /** ------ LOGIN SCENE ----------*/
         //Create Labels, TextFields, and Button
         Label loginLabel = new Label("Login");
@@ -130,6 +133,12 @@ public class MailClient extends Application {
 
         //Create Login Scene
         loginScene = new Scene(vbox2, 410, 200);
+
+        //Style Login Scene
+        loginScene.getStylesheets().add("emaillogin.css");
+
+        //Style loginLabel
+        loginLabel.getStyleClass().add("login-label");
 
         /** ------ START ----------*/
         primaryStage.setTitle("Mail Client");

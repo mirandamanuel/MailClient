@@ -1,0 +1,9 @@
+.root {
+    -fx-background-color: #C2ECFF;
+    -fx-font-size: 10pt;
+}
+
+.login-label {
+    -fx-font-size: 15pt;
+    -fx-font-weight: bold;
+}
