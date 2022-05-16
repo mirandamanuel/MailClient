@@ -2,7 +2,7 @@ import java.util.*;
 import javax.mail.*;
  
 public class ReceiveEmail { 
-public static ArrayList<EmailMessage> receiveEmail(String user, String password){
+public static ArrayList<EmailMessage> receiveEmail(User user){
     ArrayList<EmailMessage> msgs = new ArrayList<EmailMessage>();
     EmailMessage em;
     
@@ -18,7 +18,7 @@ public static ArrayList<EmailMessage> receiveEmail(String user, String password)
     Session session = Session.getInstance(props);	
     try {  
         Store mailStore = session.getStore(storeType);
-        mailStore.connect(hostType, user, password);
+        mailStore.connect(hostType, user.getUsername(), user.getPassword());
  
         Folder folder = mailStore.getFolder("INBOX");
         folder.open(Folder.READ_ONLY);
@@ -52,13 +52,12 @@ public static ArrayList<EmailMessage> receiveEmail(String user, String password)
 return msgs;        
 }
  
-public static void main(String[] args) {
- String userName = "javamailsender3800@gmail.com";
- String password = "Chapter6!Skirt!Palace";
+public static void recieve(String[] args) {
+ User user = new User("javamailsender3800@gmail.com", "Chapter6!Skirt!Palace");
  ArrayList<EmailMessage> emails = new ArrayList<EmailMessage>();
  
  //call receiveEmail
- emails = receiveEmail(userName, password);
+ emails = receiveEmail(user);
 
  for (int i = 0; i < emails.size(); i++){
      System.out.println("\nSubject: " + emails.get(i).subject);
