@@ -14,18 +14,9 @@ import javafx.geometry.Pos;
 import javafx.geometry.Insets;
 import javafx.event.EventHandler;
 import javafx.event.ActionEvent;
-<<<<<<< Updated upstream
-import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.input.MouseEvent;
-import java.util.ArrayList;
-import javax.mail.Address;
-=======
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.input.MouseEvent;
->>>>>>> Stashed changes
 
 public class MailClient extends Application {
     static User user;
@@ -144,45 +135,6 @@ public class MailClient extends Application {
         primaryStage.show();
     }
 
-<<<<<<< Updated upstream
-    @FXML
-    private TableView<EmailMessage> emTable;
-
-    @FXML
-    private TableColumn<EmailMessage, String> emDate;
-
-    @FXML
-    private TableColumn<EmailMessage, String> emSubject;
-
-
-    @FXML
-    private TableColumn<EmailMessage, String> emFrom;
-
-
-    @FXML
-    private TableColumn<EmailMessage, ArrayList<Address>> emTo;
-
-
-    @FXML
-    private TableColumn<EmailMessage, String> emMessage;
-
-
-    public void inbox(ActionEvent e){
-
-    }
-
-    public void compose(ActionEvent e){
-
-    }
-
-    public void handle(MouseEvent mouseEvent) {
-    }
-
-    public void inboxButtClicked(MouseEvent mouseEvent) {
-    }
-
-=======
->>>>>>> Stashed changes
     public void composeButtClicked(MouseEvent mouseEvent) {
         primaryStage.setScene(emailSendScene);
         primaryStage.show();
