@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.TextArea;
@@ -84,13 +85,13 @@ public class MailClient extends Application {
         /** ------ LOGIN SCENE ----------*/
         //Create Labels, TextFields, and Button
         Label loginLabel = new Label("Login");
-        Label emailLabel = new Label("email: ");
-        Label passwordLabel = new Label("password: ");
+        Label emailLabel = new Label("Email: ");
+        Label passwordLabel = new Label("Password: ");
 
         emailTextField = new TextField();
         emailTextField.setPrefWidth(300.0);
 
-        passwordTextField = new TextField();
+        passwordTextField = new PasswordField();
         passwordTextField.setPrefWidth(300.0);
 
         errorLabel = new Label();
@@ -111,7 +112,7 @@ public class MailClient extends Application {
         vbox2.setPadding(new Insets(20));
 
         //Create Login Scene
-        loginScene = new Scene(vbox2, 410, 200);
+        loginScene = new Scene(vbox2, 420, 200);
 
         //Style Login Scene
         loginScene.getStylesheets().add("emaillogin.css");
@@ -124,11 +125,16 @@ public class MailClient extends Application {
         primaryStage.setScene(loginScene);
         primaryStage.show();
     }
-
+    
+    /** ----------INBOX SCENE------------ */
     public void refreshInboxScene() {
         Label inboxLabel = new Label("Inbox");
+
+        //create table to display the user's inbox
         inboxTable = new TableView<>();        
  
+               
+        //create the columns and map the data from the messages class to add recieved e-mails in the rows
         TableColumn<EmailMessage, String> dateCol = new TableColumn<EmailMessage, String>("Date:");
         dateCol.setMinWidth(200);
         dateCol.setCellValueFactory(new PropertyValueFactory<EmailMessage, String>("date"));
@@ -163,8 +169,8 @@ public class MailClient extends Application {
         //Style inboxLabel
         inboxLabel.getStyleClass().add("inbox-label");
     }
-
-
+    
+    // method to retrieve all the user's recieved emails and save it to an observable list to use for the inbox
     public ObservableList<EmailMessage> getInbox() {
         ObservableList<EmailMessage> messagesToDisplay = FXCollections.observableArrayList();
         ArrayList<EmailMessage> messagesRetrieved = ReceiveEmail.receiveEmail(user);
@@ -190,6 +196,10 @@ public class MailClient extends Application {
         }
     }
 
+/**
+ * the login button moves the user to the inbox if they input their
+ * valid credentials
+ */
     class LoginButtonHandler implements EventHandler<ActionEvent> {
         @Override
         public void handle(ActionEvent event) {
