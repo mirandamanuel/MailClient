@@ -156,6 +156,12 @@ public class MailClient extends Application {
         inboxVbox.setAlignment(Pos.CENTER);
         inboxVbox.setPadding(new Insets(10, 50, 50, 60));
         inboxScene = new Scene(inboxVbox);
+
+        //Style Inbox Scene
+        inboxScene.getStylesheets().add("emailinbox.css");
+
+        //Style inboxLabel
+        inboxLabel.getStyleClass().add("inbox-label");
     }
 
 
