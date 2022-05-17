@@ -1,0 +1,6 @@
+- Included in our submission is a “src” folder that contains all of our source code for this project. 
+---RUNNING THE PROGRAM---
+- Our main method is located in “MailClient.java”. 
+- This application requires Java 1.8 (Java 8) to run, as that is the version of java we used which includes JavaFX. 
+- Another dependency is JavaMail, whose .jar is included in the lib folder. 
+- This program was only tested on Visual Studio Code.
